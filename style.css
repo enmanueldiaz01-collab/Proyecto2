@@ -1,0 +1,298 @@
+:root {
+    --primary-color: #007bff; /* Un azul médico estándar */
+    --bg-light: #ffffff;      /* Fondo blanco limpio */
+    --text-light: #333333;    /* Texto oscuro para fondo claro */
+    --bg-dark: #2c3e50;       /* Azul oscuro para modo oscuro */
+    --text-dark: #ecf0f1;     /* Texto claro para modo oscuro */
+
+    /* Hero section gradient colors (ajustados a tonos más suaves/médicos) */
+    --gradient-color-1: #00bcd4; /* Cyan */
+    --gradient-color-2: #2196f3; /* Azul */
+    --gradient-color-3: #4caf50; /* Verde */
+    --gradient-color-4: #03a9f4; /* Azul Claro */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    scroll-behavior: smooth;
+}
+
+/* Dark Mode Overrides */
+body.dark {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+body.dark .bg-light {
+    background: var(--bg-dark) !important;
+}
+
+body.dark .card {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+    border-color: var(--primary-color);
+}
+
+body.dark .navbar {
+    background: var(--bg-dark) !important;
+}
+
+body.dark .navbar-brand,
+body.dark .nav-link {
+    color: var(--text-dark) !important;
+}
+
+body.dark i {
+    color: var(--text-dark); /* Ensure icons are visible */
+}
+
+body.dark .text-dark {
+    color: var(--text-dark) !important; /* text-dark in dark mode should be light */
+}
+body.dark .text-primary {
+    color: var(--primary-color) !important; /* Keep primary color consistent */
+}
+body.dark .text-info {
+    color: #0dcaf0 !important; /* Keep info color consistent */
+}
+body.dark .text-danger {
+    color: #dc3545 !important; /* Keep danger color consistent */
+}
+body.dark .text-success {
+    color: #28a745 !important; /* Keep success color consistent */
+}
+
+
+/* Navbar */
+.navbar {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-dark); /* Siempre claro en navbar oscuro */
+}
+.navbar-nav .nav-link {
+    color: var(--text-dark); /* Siempre claro en navbar oscuro */
+    font-weight: 500;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+    color: var(--primary-color);
+}
+.navbar-nav .nav-link.active {
+    color: var(--primary-color);
+}
+
+#darkModeToggle {
+    border-color: var(--text-dark);
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+#darkModeToggle:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-dark);
+}
+body.dark #darkModeToggle {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+body.dark #darkModeToggle:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-dark);
+}
+
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(-45deg, var(--gradient-color-1), var(--gradient-color-2), var(--gradient-color-3), var(--gradient-color-4));
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    min-height: 100vh;
+    display: flex; /* Ensure content is centered vertically */
+    flex-direction: column;
+    justify-content: center;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.hero-section img {
+    border: 5px solid var(--primary-color);
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
+}
+
+/* Sections General */
+section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+h2 {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 3rem;
+    font-size: 2.8rem;
+}
+
+p.lead {
+    font-size: 1.25rem;
+    line-height: 1.7;
+}
+
+/* About Us Section */
+#about .p-4 {
+    border-color: var(--primary-color) !important;
+}
+#about .p-4:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+
+/* Services Section (previously Projects) */
+.project-card { /* Mantengo la clase para reutilizar los estilos */
+    border: 2px solid var(--primary-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: heartbeat 3s infinite ease-in-out;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 123, 255, 0.6);
+}
+
+.project-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Our Doctors Section (previously Experience) */
+.experience-card { /* Mantengo la clase para reutilizar los estilos */
+    border: 2px solid var(--primary-color);
+    transition: box-shadow 0.3s ease;
+}
+.experience-card:hover {
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
+}
+.experience-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 15px;
+}
+.experience-card ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 8px;
+}
+.experience-card ul li::before {
+    content: "\f00c"; /* Check icon from Font Awesome */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.experience-card img {
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+
+/* Contact Section */
+#contactForm {
+    background-color: var(--bg-light); /* Ensure form background adapts */
+}
+body.dark #contactForm {
+    background-color: var(--bg-dark);
+    border-color: var(--primary-color);
+}
+#contactForm input,
+#contactForm textarea {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    border-color: rgba(0, 123, 255, 0.5);
+}
+body.dark #contactForm input,
+body.dark #contactForm textarea {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+    border-color: var(--primary-color);
+}
+#contactForm input::placeholder,
+#contactForm textarea::placeholder {
+    color: var(--text-light);
+    opacity: 0.7;
+}
+body.dark #contactForm input::placeholder,
+body.dark #contactForm textarea::placeholder {
+    color: var(--text-dark);
+    opacity: 0.7;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Accessibility */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    .hero-section p.lead {
+        font-size: 1rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+    .navbar-nav .nav-link {
+        margin-right: 0;
+    }
+    #darkModeToggle {
+        margin-top: 10px;
+        width: 100%;
+    }
+    #darkModeToggle .d-none.d-lg-block {
+        display: inline !important;
+    }
+}
