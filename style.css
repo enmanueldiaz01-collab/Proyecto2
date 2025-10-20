@@ -20,51 +20,112 @@ body {
     scroll-behavior: smooth;
 }
 
-/* Dark Mode Overrides */
+/* ------------------------------------------------------------------- */
+/*             DARK MODE STYLES - REVISADO Y AÑADIDO !IMPORTANT        */
+/* ------------------------------------------------------------------- */
+
 body.dark {
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
+    background-color: var(--bg-dark) !important; /* Asegura el fondo del body */
+    color: var(--text-dark) !important;         /* Asegura el color del texto base */
 }
 
+/* Override Bootstrap .bg-light class in dark mode */
 body.dark .bg-light {
     background: var(--bg-dark) !important;
 }
 
+/* Override Bootstrap .card class in dark mode */
 body.dark .card {
-    background: var(--bg-dark);
-    color: var(--text-dark);
-    border-color: var(--primary-color);
+    background: var(--bg-dark) !important;
+    color: var(--text-dark) !important;
+    border-color: var(--primary-color) !important;
 }
 
+/* Override Bootstrap .navbar class in dark mode */
 body.dark .navbar {
     background: var(--bg-dark) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.2) !important; /* Ajusta el borde inferior si es necesario */
 }
 
+/* Override Bootstrap .navbar-brand and .nav-link colors in dark mode */
 body.dark .navbar-brand,
 body.dark .nav-link {
-    color: var(--text-dark) !important;
+    color: var(--text-dark) !important; /* Texto claro para la navbar */
+}
+body.dark .navbar-nav .nav-link:hover {
+    color: var(--primary-color) !important; /* Hover en modo oscuro */
+}
+body.dark .navbar-nav .nav-link.active {
+    color: var(--primary-color) !important; /* Active en modo oscuro */
 }
 
+/* Ensure icons are visible in dark mode */
 body.dark i {
-    color: var(--text-dark); /* Ensure icons are visible */
+    color: var(--text-dark) !important; /* Color predeterminado para iconos, se puede sobrescribir con clases específicas */
 }
 
+/* Specific text color overrides for Bootstrap utility classes in dark mode */
 body.dark .text-dark {
-    color: var(--text-dark) !important; /* text-dark in dark mode should be light */
+    color: var(--text-dark) !important; /* 'text-dark' debe ser claro en modo oscuro */
 }
 body.dark .text-primary {
-    color: var(--primary-color) !important; /* Keep primary color consistent */
+    color: var(--primary-color) !important; /* Mantener el color primario */
 }
 body.dark .text-info {
-    color: #0dcaf0 !important; /* Keep info color consistent */
+    color: #0dcaf0 !important; /* Mantener el color info */
 }
 body.dark .text-danger {
-    color: #dc3545 !important; /* Keep danger color consistent */
+    color: #dc3545 !important; /* Mantener el color danger */
 }
 body.dark .text-success {
-    color: #28a745 !important; /* Keep success color consistent */
+    color: #28a745 !important; /* Mantener el color success */
+}
+body.dark .text-muted { /* Ajuste para texto muted en modo oscuro */
+    color: rgba(236, 240, 241, 0.7) !important; /* Un poco más claro que text-dark */
 }
 
+
+/* Form input and textarea styles for dark mode */
+body.dark #contactForm {
+    background-color: var(--bg-dark) !important;
+    border-color: var(--primary-color) !important;
+}
+body.dark #contactForm input,
+body.dark #contactForm textarea {
+    background-color: var(--bg-dark) !important;
+    color: var(--text-dark) !important;
+    border-color: var(--primary-color) !important;
+}
+body.dark #contactForm input::placeholder,
+body.dark #contactForm textarea::placeholder {
+    color: var(--text-dark) !important;
+    opacity: 0.7 !important;
+}
+
+/* Dark Mode Toggle Button */
+#darkModeToggle {
+    border-color: var(--text-dark); /* Color del borde inicial */
+    color: var(--text-dark);       /* Color del texto inicial */
+    transition: all 0.3s ease;
+}
+#darkModeToggle:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--bg-dark); /* El texto del botón debe ser oscuro cuando el fondo es primary */
+}
+body.dark #darkModeToggle {
+    border-color: var(--primary-color) !important; /* Borde primario en modo oscuro */
+    color: var(--primary-color) !important;       /* Texto primario en modo oscuro */
+}
+body.dark #darkModeToggle:hover {
+    background-color: var(--primary-color) !important;
+    color: var(--bg-dark) !important; /* Texto oscuro cuando el fondo es primary en modo oscuro */
+}
+
+
+/* ------------------------------------------------------------------- */
+/*             GENERAL STYLES (RESTO DEL CSS)                          */
+/* ------------------------------------------------------------------- */
 
 /* Navbar */
 .navbar {
@@ -73,10 +134,10 @@ body.dark .text-success {
 .navbar-brand {
     font-weight: 700;
     font-size: 1.5rem;
-    color: var(--text-dark); /* Siempre claro en navbar oscuro */
+    color: var(--text-dark); /* Color del texto del brand en navbar oscura */
 }
 .navbar-nav .nav-link {
-    color: var(--text-dark); /* Siempre claro en navbar oscuro */
+    color: var(--text-dark); /* Color del texto de los links en navbar oscura */
     font-weight: 500;
     margin-right: 15px;
     transition: color 0.3s ease;
@@ -86,25 +147,6 @@ body.dark .text-success {
 }
 .navbar-nav .nav-link.active {
     color: var(--primary-color);
-}
-
-#darkModeToggle {
-    border-color: var(--text-dark);
-    color: var(--text-dark);
-    transition: all 0.3s ease;
-}
-#darkModeToggle:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--text-dark);
-}
-body.dark #darkModeToggle {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-}
-body.dark #darkModeToggle:hover {
-    background-color: var(--primary-color);
-    color: var(--bg-dark);
 }
 
 
@@ -214,36 +256,13 @@ p.lead {
 }
 
 
-/* Contact Section */
+/* Contact Section (mantener los estilos del formulario sin cambios de tema si ya están bien) */
 #contactForm {
-    background-color: var(--bg-light); /* Ensure form background adapts */
+    background-color: var(--bg-light); /* Asegurar que use el color base del tema actual */
 }
-body.dark #contactForm {
-    background-color: var(--bg-dark);
-    border-color: var(--primary-color);
-}
-#contactForm input,
-#contactForm textarea {
-    background-color: var(--bg-light);
-    color: var(--text-light);
-    border-color: rgba(0, 123, 255, 0.5);
-}
-body.dark #contactForm input,
-body.dark #contactForm textarea {
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
-    border-color: var(--primary-color);
-}
-#contactForm input::placeholder,
-#contactForm textarea::placeholder {
-    color: var(--text-light);
-    opacity: 0.7;
-}
-body.dark #contactForm input::placeholder,
-body.dark #contactForm textarea::placeholder {
-    color: var(--text-dark);
-    opacity: 0.7;
-}
+/* Estos estilos ahora están en la sección de Dark Mode, son los overrides. */
+/* #contactForm input, #contactForm textarea, #contactForm input::placeholder, #contactForm textarea::placeholder */
+
 
 .text-primary {
     color: var(--primary-color) !important;
