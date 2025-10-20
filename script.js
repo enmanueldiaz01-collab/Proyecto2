@@ -50,9 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Close the navbar on mobile after clicking a link
                 const navbarCollapse = document.getElementById('navbarNav');
+                // Check if Bootstrap's Collapse is loaded and initialized
                 const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
                 if (bsCollapse) {
                     bsCollapse.hide();
+                } else if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+                    // If not initialized, create a new instance (may happen if called too early)
+                    new bootstrap.Collapse(navbarCollapse, { toggle: false }).hide();
                 }
             }
         });
@@ -79,14 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
         sections.forEach(section => {
             const sectionTop = section.offsetTop - navbarHeight;
             const sectionHeight = section.clientHeight;
-            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight - 50) { // Added -50 for better trigger
                 current = section.getAttribute('id');
             }
         });
 
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
+            if (link.getAttribute('href') && link.getAttribute('href').includes(current)) {
                 link.classList.add('active');
             }
         });
