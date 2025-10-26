@@ -39,6 +39,13 @@ body.dark .card {
     background: var(--bg-dark) !important;
     color: var(--text-dark) !important;
     border-color: var(--primary-color) !important;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3) !important; /* Asegurar que la sombra también cambie */
+}
+body.dark .card-body .card-title {
+    color: var(--text-dark) !important; /* Asegura que el título de la tarjeta sea claro */
+}
+body.dark .card-body .card-text {
+    color: var(--text-dark) !important; /* Asegura que el texto de la tarjeta sea claro */
 }
 
 /* Override Bootstrap .navbar class in dark mode */
@@ -59,26 +66,31 @@ body.dark .navbar-nav .nav-link.active {
     color: var(--primary-color) !important; /* Active en modo oscuro */
 }
 
-/* Ensure icons are visible in dark mode */
+/* Ensure icons are visible and correctly colored in dark mode */
 body.dark i {
     color: var(--text-dark) !important; /* Color predeterminado para iconos, se puede sobrescribir con clases específicas */
 }
+/* Específico para iconos que deben seguir el primary-color */
+body.dark .fas.text-primary {
+    color: var(--primary-color) !important;
+}
+
 
 /* Specific text color overrides for Bootstrap utility classes in dark mode */
-body.dark .text-dark {
-    color: var(--text-dark) !important; /* 'text-dark' debe ser claro en modo oscuro */
+body.dark .text-dark { /* Esto es crucial: el 'text-dark' de Bootstrap debe ser CLARO en modo oscuro */
+    color: var(--text-dark) !important;
 }
 body.dark .text-primary {
     color: var(--primary-color) !important; /* Mantener el color primario */
 }
 body.dark .text-info {
-    color: #0dcaf0 !important; /* Mantener el color info */
+    color: #0dcaf0 !important; /* Mantener el color info (BootStrap default) */
 }
 body.dark .text-danger {
-    color: #dc3545 !important; /* Mantener el color danger */
+    color: #dc3545 !important; /* Mantener el color danger (BootStrap default) */
 }
 body.dark .text-success {
-    color: #28a745 !important; /* Mantener el color success */
+    color: #28a745 !important; /* Mantener el color success (BootStrap default) */
 }
 body.dark .text-muted { /* Ajuste para texto muted en modo oscuro */
     color: rgba(236, 240, 241, 0.7) !important; /* Un poco más claro que text-dark */
@@ -92,34 +104,116 @@ body.dark #contactForm {
 }
 body.dark #contactForm input,
 body.dark #contactForm textarea {
-    background-color: var(--bg-dark) !important;
+    background-color: #495057 !important; /* Un poco más claro que bg-dark para distinción */
     color: var(--text-dark) !important;
     border-color: var(--primary-color) !important;
 }
 body.dark #contactForm input::placeholder,
 body.dark #contactForm textarea::placeholder {
+    color: rgba(236, 240, 241, 0.7) !important; /* Placeholder claro y ligeramente transparente */
+    opacity: 1 !important; /* Asegurar que la opacidad del placeholder no se anule */
+}
+body.dark #contactForm .form-label { /* Si alguna etiqueta visual fuera usada */
     color: var(--text-dark) !important;
-    opacity: 0.7 !important;
 }
 
 /* Dark Mode Toggle Button */
 #darkModeToggle {
-    border-color: var(--text-dark); /* Color del borde inicial */
-    color: var(--text-dark);       /* Color del texto inicial */
+    border-color: var(--text-dark); /* Borde inicial oscuro para bg-dark navbar */
+    color: var(--text-dark);       /* Texto inicial claro para bg-dark navbar */
+    background-color: transparent; /* Fondo transparente por defecto */
     transition: all 0.3s ease;
 }
 #darkModeToggle:hover {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
-    color: var(--bg-dark); /* El texto del botón debe ser oscuro cuando el fondo es primary */
+    color: var(--bg-light); /* El texto del botón debe ser claro cuando el fondo es primary */
 }
 body.dark #darkModeToggle {
     border-color: var(--primary-color) !important; /* Borde primario en modo oscuro */
     color: var(--primary-color) !important;       /* Texto primario en modo oscuro */
+    background-color: transparent !important;
 }
 body.dark #darkModeToggle:hover {
     background-color: var(--primary-color) !important;
     color: var(--bg-dark) !important; /* Texto oscuro cuando el fondo es primary en modo oscuro */
+}
+
+
+/* Hero Section in Dark Mode (opcional: si quieres cambiar el gradiente) */
+/* Por ahora, mantengo el gradiente como estaba, pero aquí podrías modificarlo:
+body.dark .hero-section {
+    background: linear-gradient(-45deg, #1a2a3a, #2a3d50, #3a4f6a, #2a3d50);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+*/
+body.dark .hero-section img {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.8) !important; /* Sombra más pronunciada para contraste */
+}
+
+
+/* About Us Section in Dark Mode */
+body.dark #about .p-4 {
+    background-color: var(--bg-dark) !important; /* Asegura el fondo de los divs */
+    border-color: var(--primary-color) !important; /* Borde oscuro */
+    color: var(--text-dark) !important; /* Texto claro */
+}
+body.dark #about .p-4 i {
+    color: var(--primary-color) !important; /* Iconos primarios en modo oscuro */
+}
+body.dark #about h5 {
+    color: var(--text-dark) !important;
+}
+
+/* Services Section (previously Projects) in Dark Mode */
+body.dark .project-card {
+    background-color: var(--bg-dark) !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 25px rgba(0, 123, 255, 0.6) !important;
+}
+body.dark .project-card .card-img-top {
+    border-bottom-color: var(--primary-color) !important;
+}
+body.dark .project-card .btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--bg-dark) !important; /* Texto oscuro para contraste en botón primario */
+}
+body.dark .project-card .btn-primary:hover {
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+    color: var(--text-dark) !important; /* Color de texto más claro en hover */
+}
+
+
+/* Our Doctors Section (previously Experience) in Dark Mode */
+body.dark .experience-card {
+    background-color: var(--bg-dark) !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.4) !important;
+    color: var(--text-dark) !important;
+}
+body.dark .experience-card img {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.6) !important;
+}
+body.dark .experience-card h5 {
+    color: var(--text-dark) !important;
+}
+body.dark .experience-card ul li {
+    color: var(--text-dark) !important;
+}
+body.dark .experience-card ul li::before {
+    color: var(--primary-color) !important;
+}
+
+/* Footer in Dark Mode */
+body.dark footer {
+    background-color: #1a2a3a !important; /* Un color un poco más oscuro para el footer en modo oscuro */
+    color: var(--text-dark) !important;
+    border-top-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 
@@ -134,10 +228,10 @@ body.dark #darkModeToggle:hover {
 .navbar-brand {
     font-weight: 700;
     font-size: 1.5rem;
-    color: var(--text-dark); /* Color del texto del brand en navbar oscura */
+    color: var(--text-dark); /* Color del texto del brand en navbar oscura por defecto */
 }
 .navbar-nav .nav-link {
-    color: var(--text-dark); /* Color del texto de los links en navbar oscura */
+    color: var(--text-dark); /* Color del texto de los links en navbar oscura por defecto */
     font-weight: 500;
     margin-right: 15px;
     transition: color 0.3s ease;
@@ -180,10 +274,14 @@ section {
 
 h2 {
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--primary-color); /* Color de títulos por defecto */
     margin-bottom: 3rem;
     font-size: 2.8rem;
 }
+body.dark h2 { /* Títulos en modo oscuro */
+    color: var(--primary-color) !important; /* Mantener el color primario */
+}
+
 
 p.lead {
     font-size: 1.25rem;
@@ -193,6 +291,14 @@ p.lead {
 /* About Us Section */
 #about .p-4 {
     border-color: var(--primary-color) !important;
+    background-color: var(--bg-light); /* Fondo claro para modo claro */
+    color: var(--text-light); /* Texto oscuro para modo claro */
+}
+#about .p-4 i {
+    color: var(--primary-color);
+}
+#about .p-4 h5 {
+    color: var(--text-light); /* Títulos en modo claro */
 }
 #about .p-4:hover {
     transform: translateY(-5px);
@@ -204,6 +310,8 @@ p.lead {
     border: 2px solid var(--primary-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: heartbeat 3s infinite ease-in-out;
+    background-color: var(--bg-light); /* Fondo claro para modo claro */
+    color: var(--text-light); /* Texto oscuro para modo claro */
 }
 
 .project-card:hover {
@@ -227,6 +335,8 @@ p.lead {
 .experience-card { /* Mantengo la clase para reutilizar los estilos */
     border: 2px solid var(--primary-color);
     transition: box-shadow 0.3s ease;
+    background-color: var(--bg-light); /* Fondo claro para modo claro */
+    color: var(--text-light); /* Texto oscuro para modo claro */
 }
 .experience-card:hover {
     box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
@@ -240,6 +350,7 @@ p.lead {
     position: relative;
     padding-left: 25px;
     margin-bottom: 8px;
+    color: var(--text-light); /* Texto oscuro para modo claro */
 }
 .experience-card ul li::before {
     content: "\f00c"; /* Check icon from Font Awesome */
@@ -254,14 +365,27 @@ p.lead {
     border: 3px solid var(--primary-color);
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
 }
+.experience-card h5 {
+    color: var(--text-light); /* Títulos en modo claro */
+}
 
 
 /* Contact Section (mantener los estilos del formulario sin cambios de tema si ya están bien) */
 #contactForm {
-    background-color: var(--bg-light); /* Asegurar que use el color base del tema actual */
+    background-color: var(--bg-light); /* Fondo claro para modo claro */
+    border-color: var(--primary-color);
+    color: var(--text-light); /* Texto oscuro para modo claro */
 }
-/* Estos estilos ahora están en la sección de Dark Mode, son los overrides. */
-/* #contactForm input, #contactForm textarea, #contactForm input::placeholder, #contactForm textarea::placeholder */
+#contactForm input,
+#contactForm textarea {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    border-color: var(--primary-color);
+}
+#contactForm input::placeholder,
+#contactForm textarea::placeholder {
+    color: rgba(51, 51, 51, 0.7); /* Placeholder oscuro y ligeramente transparente */
+}
 
 
 .text-primary {
@@ -270,10 +394,12 @@ p.lead {
 .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+    color: var(--bg-light); /* Texto blanco para botón primario por defecto */
 }
 .btn-primary:hover {
     background-color: #0056b3;
     border-color: #0056b3;
+    color: var(--bg-light);
 }
 
 /* Footer */
@@ -311,7 +437,8 @@ textarea:focus {
         margin-top: 10px;
         width: 100%;
     }
-    #darkModeToggle .d-none.d-lg-block {
+    /* Asegurar que el texto del modo oscuro sea visible en pantallas pequeñas */
+    #darkModeToggle #darkModeText {
         display: inline !important;
     }
 }
