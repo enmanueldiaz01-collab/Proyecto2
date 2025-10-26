@@ -1,21 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeIcon = darkModeToggle.querySelector('i'); // Selecciona el icono
+    const darkModeText = document.getElementById('darkModeText'); // Selecciona el span del texto
     const body = document.body;
 
-    // Function to set dark mode
+    // Función para establecer el modo oscuro
     const setDarkMode = (isDark) => {
         if (isDark) {
             body.classList.add('dark');
-            darkModeToggle.innerHTML = '<i class="fas fa-sun me-2"></i> <span class="d-none d-lg-block">Modo Claro</span>';
+            darkModeIcon.classList.remove('fa-moon');
+            darkModeIcon.classList.add('fa-sun');
+            if (darkModeText) darkModeText.textContent = 'Modo Claro'; // Actualiza el texto
             localStorage.setItem('darkMode', 'enabled');
         } else {
             body.classList.remove('dark');
-            darkModeToggle.innerHTML = '<i class="fas fa-moon me-2"></i> <span class="d-none d-lg-block">Modo Oscuro</span>';
+            darkModeIcon.classList.remove('fa-sun');
+            darkModeIcon.classList.add('fa-moon');
+            if (darkModeText) darkModeText.textContent = 'Modo Oscuro'; // Actualiza el texto
             localStorage.setItem('darkMode', 'disabled');
         }
     };
 
-    // Auto-detect prefers-color-scheme and apply saved preference
+    // Auto-detecta prefers-color-scheme y aplica la preferencia guardada
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedDarkMode = localStorage.getItem('darkMode');
 
@@ -24,15 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (savedDarkMode === 'disabled') {
         setDarkMode(false);
     } else if (prefersDarkMode) {
-        setDarkMode(true);
+        setDarkMode(true); // Si el sistema prefiere oscuro y no hay preferencia guardada, activa oscuro
+    } else {
+        setDarkMode(false); // Si no hay preferencia guardada ni sistema prefiere oscuro, va a claro
     }
 
-    // Toggle dark mode on button click
+
+    // Toggle dark mode al hacer clic en el botón
     darkModeToggle.addEventListener('click', () => {
         setDarkMode(!body.classList.contains('dark'));
     });
 
-    // Smooth scroll for navbar links
+    // Smooth scroll para enlaces de la barra de navegación
     document.querySelectorAll('#mainNavbar .nav-link').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -48,31 +57,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth'
                 });
 
-                // Close the navbar on mobile after clicking a link
+                // Cierra la barra de navegación en móvil después de hacer clic en un enlace
                 const navbarCollapse = document.getElementById('navbarNav');
-                // Check if Bootstrap's Collapse is loaded and initialized
+                // Verifica si Bootstrap's Collapse está cargado e inicializado
                 const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
                 if (bsCollapse) {
                     bsCollapse.hide();
                 } else if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
-                    // If not initialized, create a new instance (may happen if called too early)
+                    // Si no está inicializado, crea una nueva instancia (puede ocurrir si se llama muy temprano)
                     new bootstrap.Collapse(navbarCollapse, { toggle: false }).hide();
                 }
             }
         });
     });
 
-    // Form submission simulation
+    // Simulación de envío de formulario
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent actual form submission
+            e.preventDefault(); // Previene el envío real del formulario
             alert('¡Tu consulta ha sido enviada! Un miembro de nuestro equipo se pondrá en contacto contigo pronto. 📧');
-            this.reset(); // Clear the form fields
+            this.reset(); // Limpia los campos del formulario
         });
     }
 
-    // Update active state of navbar links on scroll
+    // Actualiza el estado activo de los enlaces de la barra de navegación al hacer scroll
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('#mainNavbar .nav-link');
 
@@ -83,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sections.forEach(section => {
             const sectionTop = section.offsetTop - navbarHeight;
             const sectionHeight = section.clientHeight;
-            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight - 50) { // Added -50 for better trigger
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight - 50) { // Añadido -50 para un mejor trigger
                 current = section.getAttribute('id');
             }
         });
